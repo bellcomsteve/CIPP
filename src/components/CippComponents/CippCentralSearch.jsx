@@ -46,7 +46,7 @@ async function loadTabOptions() {
     "/email/administration/exchange-retention",
     "/cipp/custom-data",
     "/cipp/super-admin",
-    "/tenant/standards/list-standards",
+    "/tenant/standards",
     "/tenant/manage",
     "/tenant/administration/applications",
     "/tenant/administration/tenants",
@@ -88,14 +88,6 @@ async function loadTabOptions() {
  */
 function filterItemsByPermissionsAndRoles(items, userPermissions, userRoles) {
   return items.filter((item) => {
-    // Check roles if specified
-    if (item.roles && item.roles.length > 0) {
-      const hasRole = item.roles.some((requiredRole) => userRoles.includes(requiredRole));
-      if (!hasRole) {
-        return false;
-      }
-    }
-
     // Check permissions with pattern matching support
     if (item.permissions && item.permissions.length > 0) {
       const hasPermission = userPermissions?.some((userPerm) => {
